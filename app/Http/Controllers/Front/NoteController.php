@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Front;
 
 use App\Models\Note;
 use App\Http\Requests\StoreNoteRequest;
 use App\Http\Requests\UpdateNoteRequest;
+use App\Http\Controllers\Controller;
 
 class NoteController extends Controller
 {
@@ -16,6 +17,11 @@ class NoteController extends Controller
     public function index()
     {
         //
+        $notes = Note::where('is_public', true)
+            ->orderBy('published_at', 'desc')
+            ->paginate(10);
+
+        return view('front.notes.index', compact('notes'));
     }
 
     /**
@@ -45,9 +51,12 @@ class NoteController extends Controller
      * @param  \App\Models\Note  $note
      * @return \Illuminate\Http\Response
      */
-    public function show(Note $note)
+    public function show(int $id)
     {
         //
+        $note = Note::where('is_public', true)->findOrFail($id);
+
+        return view('front.notes.show', compact('note'));
     }
 
     /**

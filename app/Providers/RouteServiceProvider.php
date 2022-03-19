@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
 
+use Illuminate\Support\Facades\Validator;
+// use Illuminate\Validation\Validator;
+
+
 class RouteServiceProvider extends ServiceProvider
 {
     /**
