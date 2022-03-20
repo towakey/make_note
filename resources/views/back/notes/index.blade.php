@@ -16,6 +16,7 @@ $title = "投稿一覧";
                     <th scope="col" style="width: 4.3em">状態</th>
                     <th scope="col" style="width: 9em">公開日</th>
                     <th scope="col" style="width: 12em">編集</th>
+                    <th scope="col">編集者</th>
                 </tr>
             </thead>
             <tbody>
@@ -30,10 +31,10 @@ $title = "投稿一覧";
                                 'class' => 'btn btn-secondary btn-sm m-1',
                                 'target' => '_blank'
                             ]) }}
-                            {{ link_to_route('front.notes.edit', '編集', $note, [
+                            {{ link_to_route('back.notes.edit', '編集', $note, [
                                 'class' => 'btn btn-secondary btn-sm m-1',
                             ]) }}
-                            {{ Form::model($post, [
+                            {{ Form::model($note, [
                                 'route' => ['back.notes.destroy', $note],
                                 'method' => 'delete'
                             ]) }}
@@ -45,6 +46,7 @@ $title = "投稿一覧";
                             }}
                             {{ Form::close() }}
                         </td>
+                        <td>{{ $note->user->name }}</td>
                     </tr>
                 @endforeach
             </tbody>

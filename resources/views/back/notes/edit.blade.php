@@ -13,4 +13,18 @@ $title="編集";
         @include('back.notes._form')
         {!! Form::close() !!}
     </div>
+    <table class="table">
+        <tr>
+            <th>編集者</th>
+            <td>{{ $note->user->name }}</td>
+        </tr>
+        <tr>
+            <th>登録日時</th>
+            <td>{{ $note->created_at }}</td>
+        </tr>
+        <tr>
+            <th>編集日時</th>
+            <td>{{ $note->updated_at }}</td>
+        </tr>
+    </table>
 @endsection

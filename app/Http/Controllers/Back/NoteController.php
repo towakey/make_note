@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Back;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use APp\Models\Note;
+use App\Models\Note;
 use App\Http\Requests\NoteRequest;
 
 class NoteController extends Controller
@@ -17,7 +17,7 @@ class NoteController extends Controller
     public function index()
     {
         //
-        $notes = Note::latest('id')->paginate(20);
+        $notes = Note::with('user')->latest('id')->paginate(20);
         return view('back.notes.index', compact('notes'));
     }
 
@@ -71,7 +71,7 @@ class NoteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Note $note)
     {
         //
         return view('back.notes.edit', compact('note'));

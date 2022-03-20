@@ -15,6 +15,8 @@ class NoteSeeder extends Seeder
     public function run()
     {
         //
-        Note::factory()->count(50)->create();
+        \Event::fakeFor(function () {
+            Note::factory()->count(50)->create();
+        });
     }
 }
