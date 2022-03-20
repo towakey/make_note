@@ -104,8 +104,17 @@ class NoteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Note $note)
     {
         //
+        if($note->delete()){
+            $flash = ['success' => '削除しました'];
+        }else{
+            $flash = ['error' => '失敗しました'];
+        }
+
+        return redirect()
+            ->route('back.notes.index')
+            ->with($flash);
     }
 }
