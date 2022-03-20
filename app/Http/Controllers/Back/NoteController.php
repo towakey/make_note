@@ -74,6 +74,7 @@ class NoteController extends Controller
     public function edit($id)
     {
         //
+        return view('back.notes.edit', compact('note'));
     }
 
     /**
@@ -83,9 +84,18 @@ class NoteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(NoteRequest $request, Note $note)
     {
         //
+        if($note->update($request->all())){
+            $flash = ['success' => '更新しました'];
+        }else{
+            $flash = ['error' => '失敗しました'];
+        }
+
+        return redirect()
+            ->route('back.notes.edit', $note)
+            ->with($flash);
     }
 
     /**
