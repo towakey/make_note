@@ -24,13 +24,17 @@ class Note extends Model
     }
     public function getIsPublicLabelAttribute()
     {
-        // return config('common.public_status')[$this->is_public];
-        return config('common.public_status');
+        return config('common.public_status')[$this->is_public];
     }
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
     }
 
     protected static function boot()
