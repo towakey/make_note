@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Back;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use APp\Models\Note;
+use App\Http\Requests\NoteRequest;
 
 class NoteController extends Controller
 {
@@ -36,9 +38,20 @@ class NoteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(NoteRequest $request)
     {
         //
+        $note = Note::create($request->all());
+
+        if($note){
+            return redirect()
+                ->route('back.notes.edit', $note)
+                ->withSuccess('データ登録完了');
+        } else {
+            return redirect()
+                ->route('back.notes.create')
+                ->withError('登録に失敗しました');
+        }
     }
 
     /**
