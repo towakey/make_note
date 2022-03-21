@@ -15,7 +15,15 @@ class CreateTagsTable extends Migration
     {
         Schema::create('tags', function (Blueprint $table) {
             $table->id();
+            $table->char('slug', 50)->unique();
+            $table->char('name', 50);
             $table->timestamps();
+        });
+
+        Schema::create('note_tag', function(Blueprint $table) {
+            $table->increments('id');
+            $table->foreignId('note_id')->constrained();
+            $table->foreignId('tag_id')->constrained();
         });
     }
 
@@ -26,6 +34,7 @@ class CreateTagsTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('note_tag');
         Schema::dropIfExists('tags');
     }
 }
