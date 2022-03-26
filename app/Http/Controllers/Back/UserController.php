@@ -17,6 +17,26 @@ class UserController extends Controller
         return view('back.users.index', compact('users'));
     }
 
+    public function create()
+    {
+        return view('back.users.create');
+    }
+
+    public function store(UserRequest $request)
+    {
+        $user = User::create($request->all());
+
+        if($user){
+            return redirect()
+                ->route('back.users.edit', $user)
+                ->withSuccess('登録完了');
+        }else{
+            return redirect()
+                ->route('back.users.create')
+                ->withError('登録失敗');
+        }
+    }
+
     public function edit(User $user)
     {
         return view('back.users.edit', compact('user'));
