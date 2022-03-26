@@ -26,6 +26,7 @@ class AlphaNumDash implements Rule
     public function passes($attribute, $value)
     {
         //
+        return (preg_match("/^[a-z0-9_-]+$/i", $value));
     }
 
     /**
@@ -35,6 +36,6 @@ class AlphaNumDash implements Rule
      */
     public function message()
     {
-        return 'The validation error message.';
+        return ':attributeは、半角英数字か-・_を入力してください。';
     }
 }
