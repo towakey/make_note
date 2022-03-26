@@ -54,4 +54,17 @@ class UserController extends Controller
             ->route('back.users.edit', $user)
             ->with($flash);
     }
+
+    public function destroy(User $user)
+    {
+        if($user->delete()){
+            $flash = ['success' => '削除完了'];
+        }else{
+            $flash = ['error' => '削除失敗'];
+        }
+
+        return redirect()
+            ->route('back.users.index')
+            ->with($flash);
+    }
 }
