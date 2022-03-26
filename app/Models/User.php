@@ -60,4 +60,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Note::class);
     }
+
+    public function getRoleLabelAttribute()
+    {
+        return config('common.user.roles')[$this->role];
+    }
 }
