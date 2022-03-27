@@ -5,19 +5,28 @@ namespace App\Http\Controllers\Back;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Note;
+use App\Models\Tag;
 use App\Http\Requests\NoteRequest;
 
 class NoteController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(function ($request, \Closure $next) {
+            \View::share('tags', Tag::pluck('name', 'id')->toArray());
+            return $next($request);
+        })->only('index', 'create', 'edit');
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $notes = Note::with('user')->latest('id')->paginate(20);
+        $notes = Note::with('user', 'tags')->latest('id')->paginate(20);
         return view('back.notes.index', compact('notes'));
     }
 
@@ -29,7 +38,8 @@ class NoteController extends Controller
     public function create()
     {
         //
-        return view('back.notes.create');
+        $tags = Tag::pluck('name', 'id')->toArray();
+        return view('back.notes.create', compact('tags'));
     }
 
     /**
@@ -42,6 +52,8 @@ class NoteController extends Controller
     {
         //
         $note = Note::create($request->all());
+
+        $note->tags()->attach($request->tags);
 
         if($note){
             return redirect()
@@ -87,6 +99,8 @@ class NoteController extends Controller
     public function update(NoteRequest $request, Note $note)
     {
         //
+        $note->tags()->sync($request->tags);
+
         if($note->update($request->all())){
             $flash = ['success' => '更新しました'];
         }else{
@@ -107,6 +121,8 @@ class NoteController extends Controller
     public function destroy(Note $note)
     {
         //
+        $note->tags()->detach();
+
         if($note->delete()){
             $flash = ['success' => '削除しました'];
         }else{

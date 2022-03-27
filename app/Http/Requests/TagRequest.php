@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\AlphaNumDash;
+use Illuminate\Validation\Rule;
 
 class TagRequest extends FormRequest
 {
@@ -13,7 +15,7 @@ class TagRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,6 +27,16 @@ class TagRequest extends FormRequest
     {
         return [
             //
+            'name' => 'required|max:50',
+            'slug' => ['required', 'max:50', new AlphaNumDash, Rule::unique('tags')->ignore($this->tag)],
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'name' => 'タグ名',
+            'slug' => 'スラッグ',
         ];
     }
 }

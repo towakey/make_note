@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Front;
 
-use App\Models\Note;
 use App\Http\Requests\StoreNoteRequest;
 use App\Http\Requests\UpdateNoteRequest;
 use App\Http\Controllers\Controller;
+use App\Models\Note;
+use App\Models\Tag;
 
 class NoteController extends Controller
 {
@@ -14,14 +15,17 @@ class NoteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(string $tagSlug = null)
     {
         //
-        $notes = Note::where('is_public', true)
-            ->orderBy('published_at', 'desc')
-            ->paginate(10);
+        // $notes = Note::where('is_public', true)
+        //     ->orderBy('published_at', 'desc')
+        //     ->paginate(10);
 
-        return view('front.notes.index', compact('notes'));
+        $notes = Note::publicList($tagSlug);
+        $tags = Tag::all();
+
+        return view('front.notes.index', compact('notes', 'tags'));
     }
 
     /**
@@ -54,7 +58,8 @@ class NoteController extends Controller
     public function show(int $id)
     {
         //
-        $note = Note::where('is_public', true)->findOrFail($id);
+        // $note = Note::where('is_public', true)->findOrFail($id);
+        $note = Note::publicFindById($id);
 
         return view('front.notes.show', compact('note'));
     }
