@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Back;
 
+use App\Http\Controllers\Controller;
 use App\Models\Tag;
+use App\Http\Requests\TagRequest;
 use App\Http\Requests\StoreTagRequest;
 use App\Http\Requests\UpdateTagRequest;
 
@@ -16,6 +18,8 @@ class TagController extends Controller
     public function index()
     {
         //
+        $tags = Tag::latest('id')->paginate(20);
+        return view('back.tags.index', compact('tags'));
     }
 
     /**
@@ -26,6 +30,7 @@ class TagController extends Controller
     public function create()
     {
         //
+        return view('back.tags.create');
     }
 
     /**
@@ -37,6 +42,17 @@ class TagController extends Controller
     public function store(StoreTagRequest $request)
     {
         //
+        $tag = Tag::create($request->all());
+
+        if($tag){
+            return redirect()
+                ->route('back.tags.edit', $tag)
+                ->withSuccess('登録完了');
+        }else{
+            return redirect()
+                ->route('back.tags.create')
+                ->withError('登録失敗');
+        }
     }
 
     /**
@@ -59,6 +75,7 @@ class TagController extends Controller
     public function edit(Tag $tag)
     {
         //
+        return view('back.tags.edit', compact('tag'));
     }
 
     /**
@@ -71,6 +88,14 @@ class TagController extends Controller
     public function update(UpdateTagRequest $request, Tag $tag)
     {
         //
+        if($tag->update($request->all())){
+            $flash = ['success' => '更新完了'];
+        }else{
+            $flash = ['error' => '更新失敗'];
+        }
+        return redirect()
+            ->route('back.tags.edit', $tag)
+            ->with($flash);
     }
 
     /**
@@ -82,5 +107,13 @@ class TagController extends Controller
     public function destroy(Tag $tag)
     {
         //
+        if($tag->delete()){
+            $flash = ['success' => '削除完了'];
+        }else{
+            $flash = ['error' => '削除失敗'];
+        }
+        return redirect()
+            ->route('back.tags.index')
+            ->with($flash);
     }
 }
