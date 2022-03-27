@@ -31,12 +31,12 @@ $title="投稿一覧";
             @foreach ($notes as $note)
                 <tr>
                     <td>{{ $note->published_format }}</td>
+                    <td>{!! link_to_route('front.notes.show', $note->title, $note) !!}</td>
                     <td>
                         @foreach ($note->tags as $tag)
                             <span class="badge badge-info">{{ $tag->name }}</span>
                         @endforeach
                     </td>
-                    <td>{!! link_to_route('front.notes.show', $note->title, $note) !!}</td>
                 </tr>
             @endforeach
         </table>
