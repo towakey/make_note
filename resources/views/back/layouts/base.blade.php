@@ -20,12 +20,6 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('back.dashboard') }}">DASHBOARD</a>
-                            </li>
-                            <li class="nav-item{{ Request::is('admin/notes', 'admin/notes/*') ? ' active' : '' }}">
-                                <a class="nav-link" href="{{ route('back.notes.index') }}">投稿</a>
-                            </li>
-                            <li class="nav-item">
                                 <a href="#" class="nav-link" onclick="(function(){
                                     document.getElementById('logout-form').submit();
                                     return false;
