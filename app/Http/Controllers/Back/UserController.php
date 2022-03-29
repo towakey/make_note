@@ -19,8 +19,7 @@ class UserController extends Controller
 
     public function show(int $id)
     {
-        $users = User::latest('id')->paginate(20);
-        return view('back.users.show', compact('users'));
+        return view('back.users.show');
     }
 
     public function create()
