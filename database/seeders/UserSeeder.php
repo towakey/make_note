@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class UserSeeder extends Seeder
 {
@@ -16,7 +17,7 @@ class UserSeeder extends Seeder
         //
         \DB::table('users')->insert([
             [
-                'id' => 'admin',
+                'id' => (string) Str::orderedUuid(),
                 'name' => 'admin',
                 'email' => 'admin@example.com',
                 'email_verified_at' => now(),
@@ -26,7 +27,7 @@ class UserSeeder extends Seeder
                 'updated_at' => now()
             ],
             [
-                'id' => 'test',
+                'id' => (string) Str::orderedUuid(),
                 'name' => 'test',
                 'email' => 'test@example.com',
                 'email_verified_at' => now(),
