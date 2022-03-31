@@ -16,6 +16,7 @@ class UserSeeder extends Seeder
         //
         \DB::table('users')->insert([
             [
+                'id' => 'admin',
                 'name' => 'admin',
                 'email' => 'admin@example.com',
                 'email_verified_at' => now(),
@@ -25,6 +26,7 @@ class UserSeeder extends Seeder
                 'updated_at' => now()
             ],
             [
+                'id' => 'test',
                 'name' => 'test',
                 'email' => 'test@example.com',
                 'email_verified_at' => now(),

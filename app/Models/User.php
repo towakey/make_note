@@ -9,9 +9,15 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 
+use Illuminate\Support\Str;
+
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+
+    protected $primaryKey = 'id';
+    public $incrementing = false;
+    protected $keyType = 'string';
 
     /**
      * The attributes that are mass assignable.
@@ -48,6 +54,10 @@ class User extends Authenticatable
     protected static function boot()
     {
         parent::boot();
+
+        static::creating(function ($model){
+            $model->{$model->getKeyName()} = (string) Str::orderedUuid();
+        });
 
         self::saving(function($user){
             if($user->password){

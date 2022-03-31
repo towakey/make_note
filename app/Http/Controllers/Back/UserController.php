@@ -17,7 +17,7 @@ class UserController extends Controller
         return view('back.users.index', compact('users'));
     }
 
-    public function show(int $id)
+    public function show(string $id)
     {
         return view('back.users.show');
     }
