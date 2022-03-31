@@ -3,7 +3,9 @@
 namespace Database\Factories;
 
 use App\Models\Note;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Query\Builder;
 
 class NoteFactory extends Factory
 {
@@ -15,6 +17,7 @@ class NoteFactory extends Factory
      */
     public function definition()
     {
+        $userUnique = User::groupBy('id')->get(['id']);
         $random_date = $this->faker->dateTimeBetween('-1year', '-1day');
         return [
             //
@@ -22,7 +25,7 @@ class NoteFactory extends Factory
             'body' => $this->faker->realText(rand(100,200)),
             'is_public' => $this->faker->boolean(90),
             'published_at' => $random_date,
-            'user_id' => $this->faker->numberBetween(1,2),
+            'user_id' => $userUnique[$this->faker->numberBetween(1,2)-1]['id'],
             'created_at' => $random_date,
             'updated_at' => $random_date
         ];
