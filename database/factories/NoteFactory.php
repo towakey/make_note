@@ -6,6 +6,7 @@ use App\Models\Note;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Query\Builder;
+use Illuminate\Support\Str;
 
 class NoteFactory extends Factory
 {
@@ -21,6 +22,7 @@ class NoteFactory extends Factory
         $random_date = $this->faker->dateTimeBetween('-1year', '-1day');
         return [
             //
+            'uuid' => (string) Str::orderedUuid(),
             'title' => $this->faker->realText(rand(20,50)),
             'body' => $this->faker->realText(rand(100,200)),
             'is_public' => $this->faker->boolean(90),

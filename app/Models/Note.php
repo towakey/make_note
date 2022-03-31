@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class Note extends Model
 {
@@ -26,6 +27,7 @@ class Note extends Model
 
         self::saving(function($note){
             $note->user_id = \Auth::id();
+            $note->uuid = (string) Str::orderedUuid();
         });
     }
 

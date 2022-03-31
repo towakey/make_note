@@ -15,6 +15,7 @@ class CreateNotesTable extends Migration
     {
         Schema::create('notes', function (Blueprint $table) {
             $table->id();
+            $table->uuid('uuid');
             $table->string('title');
             $table->text('body')->nullable();
             $table->boolean('is_public')->default(true)->comment('公開・非公開');
