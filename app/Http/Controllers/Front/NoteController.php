@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateNoteRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Note;
 use App\Models\Tag;
+use App\Support\Markdown;
 
 class NoteController extends Controller
 {
@@ -60,8 +61,9 @@ class NoteController extends Controller
         //
         // $note = Note::where('is_public', true)->findOrFail($id);
         $note = Note::publicFindById($id);
+        $parse = Markdown::parse($note->body);
 
-        return view('front.notes.show', compact('note'));
+        return view('front.notes.show', compact('note', 'parse'));
     }
 
     /**

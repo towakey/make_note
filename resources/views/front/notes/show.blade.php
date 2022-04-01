@@ -9,7 +9,7 @@ $title="投稿詳細";
     <h2>{{ $note->title }}</h2>
     <time>{{ $note->publised_format }}</time>
     <div>
-        {!! nl2br(e($note->body)) !!}
+        {{ $parse }}
     </div>
     @if(0 < count($note->tags))
         <ul class="mt-3">
