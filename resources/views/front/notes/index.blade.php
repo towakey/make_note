@@ -4,7 +4,7 @@ $title="投稿一覧";
 @extends('front.layouts.base')
 
 @section('content')
-
+<div class="card border-light mb-3">
 <div class="card-header">{{ $title }}</div>
 <div class="card-body">
     <ul class="nav nav-pills mb-2">
@@ -44,5 +44,6 @@ $title="投稿一覧";
             {{ $notes->links() }}
         </div>
     @endif
+</div>
 </div>
 @endsection

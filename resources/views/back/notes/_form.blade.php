@@ -70,13 +70,6 @@
 </div>
 
 <div class="form-group row">
-    <div class="col-sm-10">
-        <button type="submit" class="btn btn-primary">保存</button>
-        {{ link_to_route('back.notes.index', '一覧へ', null, ['class' => 'btn btn-secondary']) }}
-    </div>
-</div>
-
-<div class="form-group row">
     {!! Form::label('tags', 'タグ', ['class', 'col-sm-2 control-label']) !!}
     <div class="col-sm-10">
         <div class="{{ $errors->has('tags.*') ? 'is-invalid' : '' }}">
@@ -94,3 +87,11 @@
         @enderror
     </div>
 </div>
+
+<div class="form-group row">
+    <div class="col-sm-10">
+        <button type="submit" class="btn btn-primary">保存</button>
+        {{ link_to_route('back.notes.index', '一覧へ', null, ['class' => 'btn btn-secondary']) }}
+    </div>
+</div>
+
