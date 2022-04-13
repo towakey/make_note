@@ -18,6 +18,9 @@ $title = 'DASHBOARD';
             <tr>
                 <td><a href="{{ route('back.users.index') }}">ユーザー管理</a></td>
             </tr>
+            <tr>
+                <td><a href="{{ route('back.connects.index') }}">サーバー管理</a></td>
+            </tr>
             @endif
         </tbody>
     </table>
