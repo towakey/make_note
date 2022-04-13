@@ -236,4 +236,6 @@ return [
 
     ],
 
+    'server_serial' => env('SERVER_SERIAL', ''),
+
 ];
