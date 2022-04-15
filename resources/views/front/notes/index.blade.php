@@ -5,7 +5,6 @@ $title="投稿一覧";
 
 @section('content')
 <div class="card border-light mb-3">
-<div class="card-header">{{ $title }}</div>
 <div class="card-body">
     <ul class="nav nav-pills mb-2">
         <li class="nav-item">
