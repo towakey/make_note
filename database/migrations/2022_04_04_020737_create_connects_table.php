@@ -14,10 +14,10 @@ class CreateConnectsTable extends Migration
     public function up()
     {
         Schema::create('connects', function (Blueprint $table) {
-            $table->id()->primary();
+            $table->id();
             $table->string('name');             //他サーバー名
             $table->string('serial');           //サーバーのシリアル
-            $table->string('url')->unique();;   //相手のURL
+            $table->string('url')->unique();   //相手のURL
             $table->string('token');            //承認後のアクセス用token
             $table->integer('approval');        //承認状態 0:承認待ち 1:承認 2:拒否 4:申請中
             $table->timestamps();
