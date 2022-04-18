@@ -46,12 +46,14 @@ class ConnectController extends Controller
         $server_name = config('app.name', 'Frura');
         $server_serial = config('app.server_serial', '');
         $server_url = config('app.url', '');
-        $url = $request->url;
-        $res = Http::get($url,[
+        $url = $request->url."api/v1/connect/entry";
+        $res = Http::post($url,[
             'name' => $server_name,
             'serial' => $server_serial,
             'url' => $server_url
         ]);
+        $connects = Connect::latest('id')->paginate(20);
+        return view('back.connects.index', compact('connects'));
     }
 
     /**

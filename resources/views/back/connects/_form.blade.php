@@ -16,7 +16,7 @@
 <div class="form-group row">
     <div class="col-sm-10">
         <button type="submit" class="btn btn-primary">接続申請</button>
-        {{ link_to_route('back.notes.index', '一覧へ', null, ['class' => 'btn btn-secondary']) }}
+        {{ link_to_route('back.connects.index', '一覧へ', null, ['class' => 'btn btn-secondary']) }}
     </div>
 </div>
 

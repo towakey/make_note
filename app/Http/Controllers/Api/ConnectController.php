@@ -45,9 +45,9 @@ class ConnectController extends Controller
             }
         }else{
             return response()->json([
-                'code' => 400,
+                'code' => 404,
                 'result' => 'Bad Request'
-            ], 400);
+            ], 404);
         }
     }
 

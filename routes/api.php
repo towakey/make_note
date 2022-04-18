@@ -20,4 +20,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 // 他のサーバーとの接続申請
-Route::get('v1/connect/entry', 'Api\ConnectController@entry');
+Route::post('v1/connect/entry', 'Api\ConnectController@entry');
