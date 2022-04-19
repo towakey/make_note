@@ -35,7 +35,7 @@ class ConnectController extends Controller
             if($result){
                 return response()->json([
                     'code' => 200,
-                    'result' => $result
+                    'name' => config('app.name', 'Frura')
                 ], 200);
             }else{
                 return response()->json([
@@ -50,6 +50,7 @@ class ConnectController extends Controller
             ], 404);
         }
     }
+
 
     /**
      * Show the form for creating a new resource.
