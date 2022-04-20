@@ -51,6 +51,23 @@ class ConnectController extends Controller
         }
     }
 
+    public function check(Request $request)
+    {
+        if(Connect::where("serial",$request->serial)->exists())
+        {
+            $chk=Connect::where("serial",$request->serial)->first();
+            return response()->json([
+                "code" => 200,
+                "token" => $chk->token
+            ], 200);
+        }else{
+            return response()->json([
+                'code' => 404,
+                'result' => 'Bad Request'
+            ], 404);
+        }
+
+    }
 
     /**
      * Show the form for creating a new resource.
