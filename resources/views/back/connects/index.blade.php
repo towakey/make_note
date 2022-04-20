@@ -46,6 +46,10 @@ $title = "投稿一覧";
                                 'name' => 'rejection',
                                 'class' => 'btn btn-danger btn-sm m-1'
                             ]) }}
+                            {{ Form::submit('確認', [
+                                'name' => 'check',
+                                'class' => 'btn btn-primary btn-sm m-1'
+                            ]) }}
                             {{ Form::close() }}
                         </td>
                     </tr>

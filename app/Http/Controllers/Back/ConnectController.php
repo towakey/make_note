@@ -52,8 +52,24 @@ class ConnectController extends Controller
             'serial' => $server_serial,
             'url' => $server_url
         ]);
+    
+        if($res->status()===200){
+            $result = Connect::create([
+                "name" => $res->json()["name"],
+                "serial" => "",
+                "url" => $request->url,
+                "token" => "",
+                "approval" => 0
+            ]);
+        }
+    
         $connects = Connect::latest('id')->paginate(20);
-        return view('back.connects.index', compact('connects'));
+        return redirect()->route('back.connects.index')->with(['connects' => $connects]);
+    }
+
+    public function check(Request $request)
+    {
+
     }
 
     /**
@@ -103,8 +119,24 @@ class ConnectController extends Controller
             $connect->save();
         }
         
+        if($request->get('check')){
+            $connect = Connect::where('id',$id)->first();
+
+            $url = $connect->url."api/v1/connect/check";
+            $res = Http::post($url,[
+                'serial' => config('app.server_serial', ''),
+            ]);
+
+            var_dump($res->json());
+            if($res->status()===200){
+                $connect->token = $res->json()["token"];
+                $connect->approval = 1;
+                $connect->save();
+            }
+        }
+
         $connects = Connect::latest('id')->paginate(20);
-        return view('back.connects.index', compact('connects'));
+        return redirect()->route('back.connects.index')->with(['connects' => $connect]);
     }
 
     /**
