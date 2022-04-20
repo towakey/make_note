@@ -56,10 +56,17 @@ class ConnectController extends Controller
         if(Connect::where("serial",$request->serial)->exists())
         {
             $chk=Connect::where("serial",$request->serial)->first();
-            return response()->json([
-                "code" => 200,
-                "token" => $chk->token
-            ], 200);
+            if($chk->approval==1){
+                return response()->json([
+                    "code" => 200,
+                    "token" => $chk->token
+                ], 200);
+            }else{
+                return response()->json([
+                    'code' => 400,
+                    'result' => 'Bad Request'
+                ], 400);
+            }
         }else{
             return response()->json([
                 'code' => 404,
