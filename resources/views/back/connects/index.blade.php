@@ -38,7 +38,7 @@ $title = "投稿一覧";
                                 'route' => ['back.connects.update', $connect],
                                 'method' => 'put'
                             ]) }}
-                            @if ($connect->relation==1)
+                            @if ($connect->relation==0)
                             {{ Form::submit('承認', [
                                 'name' => 'approval',
                                 'class' => 'btn btn-primary btn-sm m-1'
@@ -48,7 +48,7 @@ $title = "投稿一覧";
                                 'class' => 'btn btn-danger btn-sm m-1'
                             ]) }}
                             @endif
-                            @if ($connect->relation==0)
+                            @if ($connect->relation==1)
                             {{ Form::submit('確認', [
                                 'name' => 'check',
                                 'class' => 'btn btn-primary btn-sm m-1'
