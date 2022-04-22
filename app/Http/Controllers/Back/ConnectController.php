@@ -56,6 +56,7 @@ class ConnectController extends Controller
         if($res->status()===200){
             $result = Connect::create([
                 "name" => $res->json()["name"],
+                "relation" => 1,
                 "serial" => "",
                 "url" => $request->url,
                 "token" => "",

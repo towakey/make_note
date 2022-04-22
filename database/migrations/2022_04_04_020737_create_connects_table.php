@@ -16,6 +16,7 @@ class CreateConnectsTable extends Migration
         Schema::create('connects', function (Blueprint $table) {
             $table->id();
             $table->string('name');             //他サーバー名
+            $table->integer('relation');        //0:受信側 1:送信側
             $table->string('serial');           //サーバーのシリアル
             $table->string('url')->unique();   //相手のURL
             $table->string('token');            //承認後のアクセス用token

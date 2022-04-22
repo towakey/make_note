@@ -27,6 +27,7 @@ class ConnectController extends Controller
         if(!$chk->exists){
             $result = Connect::create([
                 "name" => $request->name,
+                "relation" => 0,
                 "serial" => $request->serial,
                 "url" => $request->url,
                 "token" => "",
