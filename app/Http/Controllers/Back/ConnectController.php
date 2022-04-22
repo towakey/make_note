@@ -59,7 +59,7 @@ class ConnectController extends Controller
                 "serial" => "",
                 "url" => $request->url,
                 "token" => "",
-                "approval" => 0
+                "approval" => 3
             ]);
         }
     
@@ -114,7 +114,7 @@ class ConnectController extends Controller
         }
         if($request->get('rejection')){
             $connect = Connect::where('id',$id)->first();
-            $connect->approval = 0;
+            $connect->approval = 2;
             // $connect->token = (string) Str::orderedUuid();
             $connect->save();
         }
