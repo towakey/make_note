@@ -10,7 +10,7 @@ class Connect extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'serial', 'url', 'token', 'approval'
+        'name', 'relation', 'serial', 'url', 'token', 'approval'
     ];
     public function getIsApprovalLabelAttribute()
     {
