@@ -29,7 +29,14 @@ class UserController extends Controller
 
     public function store(UserRequest $request)
     {
-        $user = User::create($request->all());
+        $user = User::create([
+            // $request->all()
+            "name"=>$request->name,
+            "server"=>config('app.server_serial', ''),
+            "email"=>$request->email,
+            "password"=>$request->password,
+            "role"=>$request->role
+        ]);
 
         if($user){
             return redirect()

@@ -19,6 +19,7 @@ class UserSeeder extends Seeder
             [
                 'id' => (string) Str::orderedUuid(),
                 'name' => 'admin',
+                'server' => config('app.server_serial', ''),
                 'email' => 'admin@example.com',
                 'email_verified_at' => now(),
                 'password' => \Hash::make('123456789'),
@@ -29,6 +30,7 @@ class UserSeeder extends Seeder
             [
                 'id' => (string) Str::orderedUuid(),
                 'name' => 'test',
+                'server' => config('app.server_serial', ''),
                 'email' => 'test@example.com',
                 'email_verified_at' => now(),
                 'password' => \Hash::make('123456789'),
